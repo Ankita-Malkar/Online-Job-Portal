@@ -52,20 +52,15 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
-@GetMapping("/create-admin")
-public String createAdmin() {
-    if (userRepository.findByEmail("admin@jobportal.com").isPresent()) {
-        return "Admin already exists";
-    }
+@GetMapping("/make-admin")
+public String makeAdmin() {
+    User user = userDao.findByEmail("admin12@jobportal.com")
+            .orElseThrow(() -> new RuntimeException("User not found"));
 
-    User u = new User();
-    u.setEmail("admin@jobportal.com");
-    u.setPassword(passwordEncoder.encode("admin123"));
-    u.setRole("ADMIN");
+    user.setRole("ADMIN");
+    userDao.save(user);
 
-    userRepository.save(u);
-
-    return "Admin created";
+    return "Updated to ADMIN";
 }
     @GetMapping("/role/{role}")
     public ResponseEntity<List<User>> getUsersByRole(@PathVariable String role) {
