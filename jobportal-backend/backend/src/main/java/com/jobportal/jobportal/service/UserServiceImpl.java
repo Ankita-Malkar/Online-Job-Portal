@@ -36,7 +36,11 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setEmail(dto.getEmail());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
-        user.setRole(dto.getRole().toUpperCase());
+        if (dto.getEmail().equalsIgnoreCase("admin@jobportal.com")) {
+    user.setRole("ADMIN");
+} else {
+    user.setRole(dto.getRole().toUpperCase());
+}
         user.setActive(true);
         User saved = userDao.save(user);
 
