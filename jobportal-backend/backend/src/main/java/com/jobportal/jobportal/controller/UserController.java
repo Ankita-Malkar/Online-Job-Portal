@@ -54,7 +54,7 @@ public class UserController {
     }
 @GetMapping("/make-admin")
 public String makeAdmin() {
-    User user = userDao.findByEmail("admin12@jobportal.com")
+    User user = userDao.findByEmail("admin121@jobportal.com")
             .orElseThrow(() -> new RuntimeException("User not found"));
 
     user.setRole("ADMIN");
