@@ -48,7 +48,15 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
-
+@PostMapping("/create-admin")
+public String createAdmin() {
+    User u = new User();
+    u.setEmail("admin@jobportal.com");
+    u.setPassword(passwordEncoder.encode("admin123"));
+    u.setRole("ADMIN");
+    userRepository.save(u);
+    return "Admin created";
+}
     @GetMapping("/role/{role}")
     public ResponseEntity<List<User>> getUsersByRole(@PathVariable String role) {
         return ResponseEntity.ok(userService.getUsersByRole(role));
