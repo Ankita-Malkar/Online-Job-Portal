@@ -22,7 +22,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
-
+if (request.getServletPath().startsWith("/api/auth")) {
+    filterChain.doFilter(request, response);
+    return;
+}
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
