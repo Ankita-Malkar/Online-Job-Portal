@@ -55,7 +55,7 @@ public class SecurityConfig {
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 // ── Fully public ──────────────────────────────────
-                .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
+                .requestMatchers("/api/auth/**").permitAll()
                 // Categories GET is public so Employer & Employee can load them
                 .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/job/category").permitAll()
                 .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/job/all").permitAll()
