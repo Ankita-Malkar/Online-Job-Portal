@@ -6,7 +6,7 @@ import { AuthResponse, LoginRequest, RegisterRequest } from '../models/models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly BASE = '/api/auth';
+  private readonly BASE = 'https://online-job-portal-9.onrender.com/api/auth';
   private _user$ = new BehaviorSubject<AuthResponse | null>(this.loadUser());
 
   currentUser$ = this._user$.asObservable();
