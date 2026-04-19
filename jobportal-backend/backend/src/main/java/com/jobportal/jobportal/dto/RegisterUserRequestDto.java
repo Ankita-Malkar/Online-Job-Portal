@@ -15,6 +15,6 @@ public class RegisterUserRequestDto {
     private String password;
 
     @NotBlank(message = "Role is required")
-    @Pattern(regexp = "EMPLOYEE|EMPLOYER", message = "Role must be EMPLOYEE or EMPLOYER")
+    @Pattern(regexp = "EMPLOYEE|EMPLOYER|ADMIN", message = "Role must be EMPLOYEE, EMPLOYER or ADMIN")
     private String role;
 }
