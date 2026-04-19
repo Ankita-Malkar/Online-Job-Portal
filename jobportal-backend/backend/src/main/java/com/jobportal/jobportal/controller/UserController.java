@@ -9,7 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@Autowired
+private UserRepository userRepository;
 
+@Autowired
+private PasswordEncoder passwordEncoder;
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "*")
@@ -48,13 +52,19 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
-@PostMapping("/create-admin")
+@GetMapping("/create-admin")
 public String createAdmin() {
+    if (userRepository.findByEmail("admin@jobportal.com").isPresent()) {
+        return "Admin already exists";
+    }
+
     User u = new User();
     u.setEmail("admin@jobportal.com");
     u.setPassword(passwordEncoder.encode("admin123"));
     u.setRole("ADMIN");
+
     userRepository.save(u);
+
     return "Admin created";
 }
     @GetMapping("/role/{role}")
